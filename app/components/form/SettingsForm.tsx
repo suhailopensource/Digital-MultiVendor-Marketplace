@@ -35,6 +35,7 @@ export function SettingsForm({ email, firstName, lastName }: iAppProps) {
             toast.success(state.message);
         }
     }, [state]);
+
     return (
         <form action={formAction}>
             <CardHeader>
@@ -47,11 +48,17 @@ export function SettingsForm({ email, firstName, lastName }: iAppProps) {
                 <div className="flex flex-col gap-y-2">
                     <Label>First Name</Label>
                     <Input name="firstName" type="text" defaultValue={firstName} />
+                    {
+                        state?.errors?.["firstName"]?.[0] && (
+                            <p className="text-destructive">{state?.errors?.["firstName"]?.[0]}</p>
+                        )
+                    }
                 </div>
 
                 <div className="flex flex-col gap-y-2">
                     <Label>Last Name</Label>
                     <Input name="lastName" type="text" defaultValue={lastName} />
+
                 </div>
 
                 <div className="flex flex-col gap-y-2">
