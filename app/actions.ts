@@ -93,7 +93,10 @@ export async function SellProduct(prevState: unknown, formData: FormData) {
   return state;
 }
 
-export async function UpdateUserSettings(formData: FormData) {
+export async function UpdateUserSettings(
+  prevState: unknown,
+  formData: FormData
+) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
