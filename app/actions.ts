@@ -44,7 +44,8 @@ const userSettingsSchema = z.object({
     .optional(),
 });
 
-export async function SellProduct(formData: FormData) {
+// eslint-disable-line no-use-before-define
+export async function SellProduct(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();

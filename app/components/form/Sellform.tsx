@@ -1,7 +1,6 @@
 "use client";
 
 import { SellProduct, type State } from "@/app/actions";
-import { UploadDropzone } from "@/app/lib/uploadthing";
 import {
     CardContent,
     CardDescription,
@@ -11,14 +10,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { type JSONContent } from "@tiptap/react";
+
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
-import { TipTapEditor } from "../Editor";
 import { SelectCategory } from "../SelectCategory";
+import { Textarea } from "@/components/ui/textarea";
+import { TipTapEditor } from "../Editor";
+import { UploadDropzone } from "@/app/lib/uploadthing";
 import { Submitbutton } from "../SubmitButton";
+
 
 
 export function SellForm() {
@@ -120,7 +122,7 @@ export function SellForm() {
                             setImages(res.map((item) => item.url));
                             toast.success("Your images have been uploaded");
                         }}
-                        onUploadError={() => {
+                        onUploadError={(error: Error) => {
                             toast.error("Something went wrong, try again");
                         }}
                     />
@@ -138,7 +140,7 @@ export function SellForm() {
                             toast.success("Your Product file has been uplaoded!");
                         }}
                         endpoint="productFileUpload"
-                        onUploadError={() => {
+                        onUploadError={(error: Error) => {
                             toast.error("Something went wrong, try again");
                         }}
                     />
