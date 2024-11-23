@@ -45,7 +45,7 @@ const userSettingsSchema = z.object({
 });
 // eslint-disable-line no-use-before-define
 // eslint-disable-line no-use-before-define
-export async function SellProduct(prevState: any, formData: FormData) {
+export async function SellProduct(prevState: State, formData: FormData) {
   // eslint-disable-line no-use-before-define
   // eslint-disable-line no-use-before-define
   const { getUser } = getKindeServerSession();
