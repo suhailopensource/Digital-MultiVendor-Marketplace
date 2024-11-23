@@ -44,12 +44,7 @@ const userSettingsSchema = z.object({
     .optional(),
 });
 
-// @ts-ignore
-export async function SellProduct(prevState: any, formData: FormData) {
-  // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
-
+export async function SellProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();
