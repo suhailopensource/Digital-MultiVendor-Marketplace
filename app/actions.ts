@@ -45,15 +45,20 @@ const userSettingsSchema = z.object({
 });
 // eslint-disable-line no-use-before-define
 // eslint-disable-line no-use-before-define
-export async function SellProduct(prevState: State, formData: FormData) {
-  // eslint-disable-line no-use-before-define
-  // eslint-disable-line no-use-before-define
-  const { getUser } = getKindeServerSession();
+export async function SellProduct(
+  prevState: State,
+  payload: unknown
+): Promise<State> {
+  const formData = payload as FormData; // Cast payload to FormData
 
+  const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   if (!user) {
-    throw new Error("Something went Wrong");
+    return {
+      status: "error",
+      message: "User not authenticated.",
+    };
   }
 
   const validateFields = productSchema.safeParse({
@@ -67,14 +72,13 @@ export async function SellProduct(prevState: State, formData: FormData) {
   });
 
   if (!validateFields.success) {
-    const state: State = {
+    return {
       status: "error",
       errors: validateFields.error.flatten().fieldErrors,
-      message: "Oops, I think There is a Mistake with your inputs.",
+      message: "Oops, there was a mistake in your inputs.",
     };
-
-    return state;
   }
+
   await prisma.product.create({
     data: {
       name: validateFields.data.name,
@@ -88,12 +92,10 @@ export async function SellProduct(prevState: State, formData: FormData) {
     },
   });
 
-  const state: State = {
+  return {
     status: "success",
     message: "Your product has been created!",
   };
-
-  return state;
 }
 
 export async function UpdateUserSettings(formData: FormData) {
