@@ -26,7 +26,7 @@ export default async function MyProductsRoute() {
     const user = await getUser();
 
     if (!user) {
-        throw new Error("Unoauthiued");
+        throw new Error("Unauthorised");
     }
 
     const data = await getData(user.id);

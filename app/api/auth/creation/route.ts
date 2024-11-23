@@ -1,13 +1,16 @@
 import prisma from "@/app/lib/db";
+import { stripe } from "@/app/lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET() {
+  noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user == null || !user.id) {
-    throw new Error("Ssomething Went Wrong!!");
+  if (!user || user === null || !user.id) {
+    throw new Error("Something went wrong...");
   }
 
   let dbUser = await prisma.user.findUnique({
@@ -28,5 +31,10 @@ export async function GET() {
       },
     });
   }
-  return NextResponse.redirect("http://localhost:3000");
+
+  return NextResponse.redirect(
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://liahus-ui.vercel.app/"
+  );
 }
