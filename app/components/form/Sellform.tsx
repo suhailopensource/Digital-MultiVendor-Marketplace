@@ -25,7 +25,10 @@ import { Submitbutton } from "../SubmitButton";
 
 export function SellForm() {
     const initalState: State = { message: "", status: undefined };
-    const [state, formAction] = useFormState(SellProduct, initalState);
+
+    // eslint-disable-line no-use-before-define
+    const [state, formAction] = useFormState(SellProduct, initalState);// eslint-disable-line no-use-before-define
+    // eslint-disable-line no-use-before-define
     const [json, setJson] = useState<null | JSONContent>(null);
     const [images, setImages] = useState<null | string[]>(null);
     const [productFile, SetProductFile] = useState<null | string>(null);
