@@ -33,7 +33,7 @@ export const ourFileRouter = {
 
   productFileUpload: f({ blob: { maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       // This code runs on your server before upload
       const { getUser } = getKindeServerSession();
 
