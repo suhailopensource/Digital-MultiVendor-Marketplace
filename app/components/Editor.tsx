@@ -1,5 +1,3 @@
-
-
 import { Button } from "@/components/ui/button";
 import {
     EditorContent,
@@ -8,7 +6,6 @@ import {
     type Editor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
 
 export const MenuBar = ({ editor }: { editor: Editor | null }) => {
     if (!editor) {
@@ -19,9 +16,7 @@ export const MenuBar = ({ editor }: { editor: Editor | null }) => {
         <div className="flex flex-wrap gap-5">
             <Button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-                variant={
-                    editor.isActive("heading", { level: 1 }) ? "default" : "secondary"
-                }
+                variant={editor.isActive("heading", { level: 1 }) ? "default" : "secondary"}
                 type="button"
             >
                 H1
@@ -29,9 +24,7 @@ export const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             <Button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                variant={
-                    editor.isActive("heading", { level: 2 }) ? "default" : "secondary"
-                }
+                variant={editor.isActive("heading", { level: 2 }) ? "default" : "secondary"}
                 type="button"
             >
                 H2
@@ -39,9 +32,7 @@ export const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             <Button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-                variant={
-                    editor.isActive("heading", { level: 3 }) ? "default" : "secondary"
-                }
+                variant={editor.isActive("heading", { level: 3 }) ? "default" : "secondary"}
                 type="button"
             >
                 H3
@@ -74,19 +65,18 @@ export const MenuBar = ({ editor }: { editor: Editor | null }) => {
     );
 };
 
-export function TipTapEditor({
-    setJson,
-    json,
-}: {
-    setJson: any;
+interface TipTapEditorProps {
+    setJson: (json: JSONContent | null) => void;
     json: JSONContent | null;
-}) {
+}
+
+export function TipTapEditor({ setJson, json }: TipTapEditorProps) {
     const editor = useEditor({
         extensions: [StarterKit],
         content: json,
         editorProps: {
             attributes: {
-                class: "focus:outline-none min-h-[150px]  prose prose-sm sm:prose-base",
+                class: "focus:outline-none min-h-[150px] prose prose-sm sm:prose-base",
             },
         },
         onUpdate: ({ editor }) => {

@@ -44,7 +44,7 @@ const userSettingsSchema = z.object({
     .optional(),
 });
 
-export async function SellProduct(prevState: any, formData: FormData) {
+export async function SellProduct(formData: FormData) {
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();
@@ -116,7 +116,7 @@ export async function UpdateUserSettings(prevState: any, formData: FormData) {
     return state;
   }
 
-  const data = await prisma.user.update({
+  await prisma.user.update({
     where: {
       id: user.id,
     },

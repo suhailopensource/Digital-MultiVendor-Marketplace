@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-prisma
 import { ProductCard } from "./ProductCard";
 import prisma from "../lib/db";
 

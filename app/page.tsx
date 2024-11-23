@@ -1,5 +1,5 @@
 import { ProductRow } from "./components/ProductRow";
-import prisma from "./lib/db";
+
 
 
 
