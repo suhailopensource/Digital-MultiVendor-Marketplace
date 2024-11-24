@@ -168,8 +168,8 @@ export async function BuyProduct(formData: FormData) {
       },
     ],
 
-    success_url: "http://localhost:3000/payment/success",
-    cancel_url: "http://localhost:3000/payment/cancel",
+    success_url: "https://liahus-ui.vercel.app/payment/success",
+    cancel_url: "https://liahus-ui.vercel.app/payment/cancel",
   });
 
   return redirect(session.url as string);
